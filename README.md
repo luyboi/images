@@ -7,8 +7,8 @@
 - `Unlocked bootloader`
 - `PC/Laptop with Windows 10-11/Linux/macOS`
 - [`Android platform tools`](https://developer.android.com/studio/releases/platform-tools)
-- [`Modified recovery image`](https://github.com/nabu-alarm/installation-guide/releases/download/files/recovery.img)
-- [`UEFI installer`](https://github.com/nabu-alarm/installation-guide/releases/download/files/uefi-installer.zip)
+- [`Modified recovery image`](https://github.com/luyboi/images/releases/download/files/recovery.img)
+- [`UEFI installer`](https://github.com/luyboi/images/releases/download/files/uefi-installer.zip)
 - [`RootFS image`](https://github.com/nabu-alarm/images/releases)
 
 ### Notes
