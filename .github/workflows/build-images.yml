@@ -337,13 +337,13 @@ jobs:
         shell: bash
         run: |
           sudo arch-chroot ./mountpoint bash - <<'EOF'
-          sudo pacman -S --needed base-devel git
+          sudo pacman -S --needed --noconfirm base-devel git
           git clone https://aur.archlinux.org/paru.git
           cd paru
-          makepkg -si
+          makepkg -si --noconfirm
           cd ..
           rm -rf paru
-          paru -S maliit-keyboard
+          paru -S --noconfirm maliit-keyboard
           EOF
 
       - name: Apply DE overlay
