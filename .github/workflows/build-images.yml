@@ -339,12 +339,14 @@ jobs:
           sudo arch-chroot ./mountpoint bash - <<'EOF'
           useradd -m tempuser
           passwd -d tempuser
-          sudo pacman -S --needed --noconfirm base-devel git
-          sudo -u tempuser bash -c "cd /home/tempuser && git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm"
+          sudo pacman -S --needed --noconfirm base-devel git rust cargo
+          mkdir -p /tmp/paru-build
+          chown tempuser:tempuser /tmp/paru-build
+          sudo -u tempuser bash -c "cd /tmp/paru-build && git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm"
           paru -S --noconfirm maliit-keyboard
           userdel -r tempuser
+          rm -rf /tmp/paru-build
           EOF
-
 
       - name: Apply DE overlay
         run: |
