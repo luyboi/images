@@ -337,13 +337,15 @@ jobs:
         shell: bash
         run: |
           sudo arch-chroot ./mountpoint bash - <<'EOF'
+          useradd -m tempuser
+          passwd -d tempuser  # Удалить пароль для удобства
           sudo pacman -S --needed --noconfirm base-devel git
           git clone https://aur.archlinux.org/paru.git
-          cd paru
-          makepkg -si --noconfirm
+          sudo -u tempuser bash -c "cd paru && makepkg -si --noconfirm"
           cd ..
           rm -rf paru
           paru -S --noconfirm maliit-keyboard
+          userdel -r tempuser
           EOF
 
       - name: Apply DE overlay
