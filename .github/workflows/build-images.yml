@@ -340,7 +340,7 @@ jobs:
           useradd -m tempuser
           passwd -d tempuser
           sudo pacman -S --needed --noconfirm base-devel git
-          sudo -u tempuser bash -c "cd /home/tempuser && git clone https://aur.archlinux.org/maliit-keyboard.git && cd maliit-keyboard && makepkg -si --noconfirm"
+          sudo -u tempuser bash -c "cd /home/tempuser && git clone https://github.com/maliit/keyboard.git maliit-keyboard && cd maliit-keyboard && makepkg -si --noconfirm"
           rm -rf /home/tempuser/maliit-keyboard
           userdel -r tempuser
           EOF
