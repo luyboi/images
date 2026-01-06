@@ -75,11 +75,9 @@ jobs:
           sudo arch-chroot ./mountpoint bash - <<'EOF'
           #sed -i 's|Server = http://mirror.archlinuxarm.org/$arch/$repo|# Server = http://mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
           #sed -i 's|# Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
-
-          curl -L https://files.catbox.moe/rki58s -0 /etc/pacman.d/mirrorlist
+          sudo curl -L https://files.catbox.moe/rki58s -o /etc/pacman.d/mirrorlist
           sudo chmod 644 /etc/pacman.d/mirrorlist
           sudo chown root:root /etc/pacman.d/mirrorlist
-
           EOF
 
       - name: Delete default user
