@@ -123,10 +123,14 @@ jobs:
       - name: Update system
         shell: bash
         run: |
+          sudo cp -L /etc/resolv.conf ./mountpoint/etc/resolv.conf
+          curl -sL https://pacman.archlinuxarm.org/mirrorlist/ | sed 's/^#Server/Server/' > ./mirrorlist.prepared
+          if command -v rankmirrors >/dev/null; then
+              rankmirrors -n 6 ./mirrorlist.prepared > ./mountpoint/etc/pacman.d/mirrorlist
+          else
+              mv ./mirrorlist.prepared ./mountpoint/etc/pacman.d/mirrorlist
+          fi
           sudo arch-chroot ./mountpoint bash - <<'EOF'
-          curl -o /etc/pacman.d/mirrorlist.new https://pacman.archlinuxarm.org/mirrorlist/
-          rankmirrors -n 0 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
-
           pacman -Syu --noconfirm
           EOF
 
