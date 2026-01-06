@@ -124,6 +124,9 @@ jobs:
         shell: bash
         run: |
           sudo arch-chroot ./mountpoint bash - <<'EOF'
+          curl -o /etc/pacman.d/mirrorlist.new https://pacman.archlinuxarm.org/mirrorlist/
+          rankmirrors -n 0 /etc/pacman.d/mirrorlist.new > /etc/pacman.d/mirrorlist
+
           pacman -Syu --noconfirm
           EOF
 
