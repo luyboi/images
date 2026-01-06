@@ -74,7 +74,7 @@ jobs:
         run: |
           sudo arch-chroot ./mountpoint bash - <<'EOF'
           sed -i 's|Server = http://mirror.archlinuxarm.org/$arch/$repo|# Server = http://mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
-          sed -i 's|# Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
+          #sed -i 's|# Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
           EOF
 
       - name: Delete default user
@@ -123,13 +123,6 @@ jobs:
       - name: Update system
         shell: bash
         run: |
-          sudo cp -L /etc/resolv.conf ./mountpoint/etc/resolv.conf
-          curl -sL https://pacman.archlinuxarm.org/mirrorlist/ | sed 's/^#Server/Server/' > ./mirrorlist.prepared
-          if command -v rankmirrors >/dev/null; then
-              rankmirrors -n 6 ./mirrorlist.prepared > ./mountpoint/etc/pacman.d/mirrorlist
-          else
-              mv ./mirrorlist.prepared ./mountpoint/etc/pacman.d/mirrorlist
-          fi
           sudo arch-chroot ./mountpoint bash - <<'EOF'
           pacman -Syu --noconfirm
           EOF
