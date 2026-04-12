@@ -83,7 +83,7 @@ jobs:
         shell: bash
         run: |
           sudo arch-chroot ./mountpoint bash - <<'EOF'
-          userdel alarm
+          userdel alarm 2>/dev/null
           EOF
 
       - name: Set locale
