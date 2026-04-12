@@ -8,6 +8,9 @@ on:
   schedule:
     - cron: "0 0 * * 2"
 
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+
 jobs:
   build-base-image:
     name: Build base image
@@ -73,8 +76,7 @@ jobs:
         shell: bash
         run: |
           sudo arch-chroot ./mountpoint bash - <<'EOF'
-          sed -i 's|Server = http://mirror.archlinuxarm.org/$arch/$repo|# Server = http://mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
-          sed -i 's|# Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|Server = http://eu.mirror.archlinuxarm.org/$arch/$repo|g' /etc/pacman.d/mirrorlist
+          echo 'Server = http://mirror.archlinuxarm.org/$arch/$repo' > /etc/pacman.d/mirrorlist
           EOF
 
       - name: Delete default user
